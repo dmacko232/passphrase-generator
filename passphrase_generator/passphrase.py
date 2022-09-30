@@ -3,6 +3,7 @@ import random
 
 from passphrase_generator.utils import contains_number
 
+
 SPECIAL_SYMBOL_SEPARATORS = [
     ".", ",", "_", "-", "!", "?", 
     "+", ">", "<", "@", "#", "~", 
@@ -40,8 +41,9 @@ def generate_passphrase(phrases: List[str], seed: int=0) -> str:
     if all(not p.islower() for p in phrases):
         phrases = [p.capitalize() for p in phrases]
 
+    # if no numbers then add numerical phrase
     if all(not contains_number(p) for p in phrases):
-        phrases.append(str(random.randint(100, 999))) # add numerical phrase
+        phrases.append(str(random.randint(100, 999)))
 
     random.shuffle(phrases)
     return separator.join(phrases)
